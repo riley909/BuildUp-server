@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-## Title
+## Fill the title according to the below form
 [Client/Server/Database] / [#이슈번호] / edit: [수정한 파일명]
 
 ## ISSUE
