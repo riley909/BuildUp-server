@@ -23,9 +23,10 @@ assignees: ''
 ## Estimated time
 > Pick one of the below
 > 0.5h / 1h / 1.5h / 2h / 2.5h / 3h
+### `0.5h`
 
 ## Labels
-Estimated time: E: 1h
-Group : client, server
-Sprint: Sprint__NUMBER__
-Urgency: High, Middle, Low
+* Estimated time: `E: 1h`
+* Group : `client`, `server`
+* Sprint: `Sprint__NUMBER__`
+* Urgency: `High`, `Middle`, `Low`
