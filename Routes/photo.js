@@ -6,3 +6,4 @@ const photo = require('../Controllers/Photo/photo');
 router.get('/photo', photo);
 
 module.exports = router;
+

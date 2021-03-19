@@ -9,6 +9,7 @@ const logger = require('morgan');
 const user = require('./routes/user');    // 라우터 에서 가져오는 코드 
 const photo = require('./routes/photo');   // 
 
+
 const app = express();
 
 app.use(logger('dev'));
@@ -22,7 +23,7 @@ app.use(
         methods: ["GET", "POST", "OPTIONS"],
     })
 );
-ㄷ
+
 let server;
 
 // app.use('/', indexRouter);
