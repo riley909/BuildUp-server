@@ -1,16 +1,23 @@
 const jwt = require('jsonwebtoken');
-
+const { user } = require('../../models');
 
 module.exports = async (req, res) => {
-
-    const userInfo = await Users.findOne({
-        where: { email: req.body.email, password: req.body.password },
-    }).catch(() => res.status(500).json({ data: null, message: "server error" }))
-
-    if (!userInfo) {
-        res.status(401).json({ data: null, message: 'not authorized' });
-    } else {
-        //있다면 jwt 토큰을 생성해서 access토큰은 클라이언트에 전달하고  refresh 토큰은 쿠키에 저장한다 
-    }
-
-}
+  const { email, password } = req.body;
+  await user
+    .findOne({
+      where: {
+        email: email,
+        password: password,
+      },
+    })
+    .then((result) => {
+      if (!result) {
+        return res.status(401).json({ message: `로그인 실패` });
+      }
+      //있다면 jwt 토큰을 생성해서 access토큰은 클라이언트에 전달하고  refresh 토큰은 쿠키에 저장한다
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(404).json({ message: 'not found' });
+    });
+};
