@@ -1,5 +1,10 @@
-const jwt = require('jsonwebtoken');
 const { user } = require('../../models');
+const {
+  generateAccessToken,
+  generateRefreshToken,
+  sendAccessToken,
+  sendRefreshToken,
+} = require('../tokenFunctions');
 
 module.exports = async (req, res) => {
   const { email, password } = req.body;
@@ -14,7 +19,16 @@ module.exports = async (req, res) => {
       if (!result) {
         return res.status(401).json({ message: `로그인 실패` });
       }
-      //있다면 jwt 토큰을 생성해서 access토큰은 클라이언트에 전달하고  refresh 토큰은 쿠키에 저장한다
+      // result에서 사용자 비밀번호 삭제
+      delete result.dataValues.password;
+      // 토큰을 생성해서 access토큰은 클라이언트에 전달
+      // refresh 토큰은 쿠키에 저장
+      const accessToken = generateAccessToken(result.dataValues);
+      const refreshToken = generateRefreshToken(result.dataValues);
+
+      // 생성한 토큰 전달
+      sendAccessToken(res, accessToken);
+      sendRefreshToken(res, refreshToken);
     })
     .catch((err) => {
       console.log(err);
