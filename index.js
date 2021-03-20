@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
-    origin: ['https://localhost:3000'],
+    origin: ['https://build-up-v.tk'],
     credentials: true,
     methods: ['GET', 'POST', 'OPTIONS'],
   })
