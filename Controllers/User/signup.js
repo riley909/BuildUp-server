@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken');
 const { user } = require('../../models');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
