@@ -7,12 +7,13 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+  
     static associate(models) {
       // define association here
       achievment.belongsTo(models.user, { foreignKey: 'user_id' });
       achievment.belongsTo(models.date, { foreignKey: 'date_id' });
     }
-  }
+  };
   achievment.init(
     {
       user_id: DataTypes.INTEGER,
@@ -25,3 +26,4 @@ module.exports = (sequelize, DataTypes) => {
   );
   return achievment;
 };
+
