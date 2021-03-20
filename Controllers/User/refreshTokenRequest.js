@@ -31,6 +31,9 @@ module.exports = (req, res) => {
       delete result.dataValues.password;
       const newAccessToken = generateAccessToken(result.dataValues);
       resendAccessToken(res, newAccessToken, result.dataValues);
+      res.json({
+        access_token: newAccessToken,
+      });
     })
     .catch((err) => {
       console.log(err);
