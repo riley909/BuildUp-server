@@ -6,8 +6,9 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const logger = require('morgan');
 
-const user = require('./routes/user');    // 라우터 에서 가져오는 코드 
-const photo = require('./routes/photo');   // 
+const user = require('./Routes/user');    // 라우터 에서 가져오는 코드 
+const photo = require('./Routes/photo');   // 
+const achievment = require('./Routes/achievment');
 
 
 const app = express();
@@ -29,6 +30,8 @@ let server;
 // app.use('/', indexRouter);
 app.use('/user', user);    //user에관한 요청시 가는 곳 
 app.use('/photo', photo);    //PHOTO에관한 요청시 가는 곳 
+app.use('/achievment', achievment);
+
 
 
 app.use('/', (req, res) => {

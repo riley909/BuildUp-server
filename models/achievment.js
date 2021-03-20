@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
             achievment.belongsTo(models.date, { foreignKey: 'date_id' });
         }
     };
-    date.init({
+    achievment.init({
         user_id: DataTypes.INTEGER,
         date_id: DataTypes.INTEGER
     }, {
