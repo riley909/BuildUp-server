@@ -6,9 +6,9 @@ const todoInfo = require('../Controllers/Todo/info');
 const todoRemove = require('../Controllers/Todo/remove');
 const todoUpdate = require('../Controllers/Todo/update');
 
-router.post('/create', todoCreate);
-router.post('/update', todoUpdate);
-router.post('/remove', todoRemove);
-router.get('/info', todoInfo);
+// router.post('/create', todoCreate);
+// router.post('/update', todoUpdate);
+// router.post('/remove', todoRemove);
+// router.get('/info', todoInfo);
 
 module.exports = router;
