@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
                 res.send(`이미 존재하는 이메일 입니다.`);
             } else {
                 res.status(201).json({
-                    data: result.data.dataValues,
+                    data: result.user.dataValues,
                     message: `회원가입 완료`,
                 });
             }
