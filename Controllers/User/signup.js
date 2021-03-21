@@ -3,12 +3,12 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 module.exports = async (req, res) => {
-  const { username, email, password } = req.body;
-  if (!username || !email || !password) {
-    return res.send(`회원 정보를 입력해 주세요`);
-  }
-  // 패스워드 DB에 저장 전 해싱하기
-  const hash = await bcrypt.hash(password, saltRounds);
+    const { username, email, password } = req.body;
+    if (!username || !email || !password) {
+        return res.send(`회원 정보를 입력해 주세요`);
+    }
+    // 패스워드 DB에 저장 전 해싱하기
+    const hash = await bcrypt.hash(password, saltRounds);
 
   user
     .findOrCreate({
