@@ -1,8 +1,9 @@
 const { achievment } = require('../../models');
+const { user } = require('../../models');
 
 module.exports = async (req, res) => {
-    const { email, achievment } = req.body;
-    await achievment
+    const { email, rate } = req.body;
+    await user                      // 여기 achievment => user
         .findOne({
             where: { email: email }
         })
@@ -10,8 +11,9 @@ module.exports = async (req, res) => {
             if (!result) {
                 res.status(401).json({ data: null, message: '존재하지 않는 유저입니다.' })
             } else {
-                result.update({
-                    rate: achievment
+                console.log(result.dataValues);
+                achievment.update({   // user => achievment
+                    rate: rate
                 })
                     .then(seResult => {
                         res.status(200).json({
@@ -21,7 +23,7 @@ module.exports = async (req, res) => {
                             },
                             message: "successfully created"
                         })
-                    })
+                    }).catch(err => console.log(err))
             }
         })
 
