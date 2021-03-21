@@ -14,7 +14,7 @@ module.exports = {
     // refreshToken 전송
     res.cookie('refreshToken', refreshToken, { httpOnly: true });
   },
-  sendAccessToken: (res, AccessToken) => {
+  sendAccessToken: (res, accessToken) => {
     // accessToken 전송
     res.json({
       data: { accessToken: accessToken },
