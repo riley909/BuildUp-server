@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     content: DataTypes.STRING,
     order: DataTypes.INTEGER,
     user_id: DataTypes.INTEGER,
-    date_id: DataTypes.INTEGER
+    date_id: DataTypes.INTEGER,
+    isChecked: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'todo',
