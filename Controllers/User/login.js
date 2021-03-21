@@ -10,11 +10,8 @@ const bcrypt = require('bcrypt');
 module.exports = async (req, res) => {
   const { email, password } = req.body;
   const userInfo = await user.findOne({
-    where: {
-      email: email,
-    },
+    where: { email: email },
   });
-
   if (!userInfo) {
     return res.status(401).json({ message: `로그인 실패` });
   }
@@ -23,19 +20,14 @@ module.exports = async (req, res) => {
     return res.status(400).json({ message: '회원 정보가 올바르지 않습니다.' });
   } else {
     // result에서 사용자 비밀번호 삭제
-    delete result.dataValues.password;
+    delete userInfo.dataValues.password;
     // 토큰을 생성해서 access토큰은 클라이언트에 전달
     // refresh 토큰은 쿠키에 저장
-    const accessToken = generateAccessToken(result.dataValues);
-    const refreshToken = generateRefreshToken(result.dataValues);
+    const accessToken = generateAccessToken(userInfo.dataValues);
+    const refreshToken = generateRefreshToken(userInfo.dataValues);
 
     // 생성한 토큰 전달
-    sendAccessToken(res, accessToken);
     sendRefreshToken(res, refreshToken);
+    sendAccessToken(res, accessToken);
   }
-
-  // .catch((err) => {
-  //   console.log(err);
-  //   res.status(404).json({ message: 'not found' });
-  // });
 };
