@@ -1,10 +1,10 @@
 const { achievment } = require('../../models');
 
 module.exports = async (req, res) => {
-    const { email } = req.body;
+    const { user_id } = req.body;
     await achievment
         .findOne({
-            where: { email: email }
+            where: { user_id: user_id }
         })
         .then(result => {
             if (!result) {

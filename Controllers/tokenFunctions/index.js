@@ -17,7 +17,7 @@ module.exports = {
   sendAccessToken: (res, accessToken) => {
     // accessToken 전송
     res.json({
-      data: { accessToken: AccessToken },
+      data: { accessToken: accessToken },
       message: 'ok',
     });
   },
