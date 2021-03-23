@@ -1,6 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 const fs = require('fs');
+const http = require('http');
 const https = require('https');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -38,19 +39,18 @@ app.use('/', (req, res) => {
 
 let server;
 const PORT = 4000;
-const certPath = `/etc/letsencrypt/live/www.build-up-v.tk`;
+const options = {
+  ca: fs.readFileSync(`/etc/letsencrypt/live/www.build-up-v.tk/fullchain.pem`),
+  key: fs.readFileSync(`/etc/letsencrypt/live/www.build-up-v.tk/privkey.pem`),
+  cert: fs.readFileSync(`/etc/letsencrypt/live/www.build-up-v.tk/cert.pem`),
+};
 
-if (fs.existsSync(`${certPath}/privkey.pem`) && fs.existsSync(`${certPath}/cert.pem`)) {
-  const privateKey = fs.readFileSync(__dirname + `/privkey.pem`, `utf-8`);
-  const certificate = fs.readFileSync(__dirname + `/cert.pem`, `utf-8`);
-  const credentials = { key: privateKey, cert: certificate };
-
-  server = https.createServer(credentials, app);
-  server.listen(PORT, () => console.log(`🚀 HTTPS Server listening on port ${PORT}`));
-} else {
-  server = app.listen(PORT, () => {
-    console.log('server on 4000');
-  });
-}
+http.createServer(app).listen(PORT);
+https.createServer(options, app).listen(443, () => {
+  console.log(`🚀 HTTPS Server listening on port 443`);
+});
+server = app.listen(PORT, () => {
+  console.log('server on 4000');
+});
 
 module.exports = server;
