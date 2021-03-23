@@ -3,14 +3,14 @@ const { todo } = require('../../models');
 module.exports = async (req, res) => {
     const { user_id, id } = req.body;
     await todo
-        .findOne({
+        .findAll({
             where: {
-                user_id: user_id
+                user_id: res.locals.userId
             }
         })
         .then((result) => {
             res.status(200).json({
-                data: result.dataValues,
+                data: result,
                 message: "good"
             })
         })

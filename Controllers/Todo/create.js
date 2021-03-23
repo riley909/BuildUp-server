@@ -1,33 +1,36 @@
-const { user } = require('../../models');
+const { date } = require("../../models");
 const { todo } = require('../../models');
 
 module.exports = async (req, res) => {
-    const { id, content, uesr_id, order } = req.body;
-    todo
-        .findOrCreate({
-            where: {
-                user_id: user_id
-            },
-            defaults: {
-                content: content,
-                order: order,
-                isChecked: false
-            },
-        })
-        .then(([result, created]) => {
-            if (!created) {
-                res.send(`이미 존재하는 콘텐츠 입니다.`);
-            } else {
-                res.status(201).json({
-                    data: result.dataValues,
-                    message: `작성 완료`,
+    const { content, order, now } = req.body;
+
+    await date.
+        create({
+            date: now
+        }).then((result) => {
+            todo
+                .create({
+                    user_id: res.locals.userId,
+                    content: content,
+                    order: order,
+                    isChecked: false,
+                    date_id: result.dataValues.id
+                })
+                .then((result) => {
+
+                    res.status(201).json({
+                        data: result.dataValues,
+                        message: '작성 완료',
+                    });
+
+                })
+                .catch((err) => {
+                    console.log(err);
+                    res.status(500).json({ message: 'server error' + err });
                 });
-            }
         })
-        .catch((err) => {
-            console.log(err);
-            res.status(500).json({ message: 'server error' + err });
-        });
+
+
 };
 
 

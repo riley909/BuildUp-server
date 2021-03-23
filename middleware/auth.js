@@ -8,9 +8,14 @@ module.exports = (req, res, next) => {
       res.locals.userId = accessTokenData.id;
       next();
     } else {
-      res.status(401).json({ message: 'unauthorized' });
+      console.log(accessTokenData);
+      res.status(401).json({ message: "unauthorized" });
     }
   } catch (err) {
-    res.status(401).json({ message: 'token expired' });
+    res.status(401).json({ message: "token expired" });
   }
 };
+
+
+
+//여기서 날짜를 지정해줘야 할거같다 

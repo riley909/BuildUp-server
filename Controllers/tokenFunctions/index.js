@@ -4,7 +4,7 @@ const { sign, verify } = require('jsonwebtoken');
 module.exports = {
   generateAccessToken: (data) => {
     // accessToken 생성
-    return sign(data, process.env.ACCESS_SECRET, { expiresIn: '15s' });
+    return sign(data, process.env.ACCESS_SECRET, { expiresIn: '12h' }); // 테스트용으로 시간 연장
   },
   generateRefreshToken: (data) => {
     // refreshToken 생성
@@ -32,6 +32,7 @@ module.exports = {
     // 인증 확인
     // accessToken 검증
     const authorization = req.headers['authorization'];
+    console.log(authorization, 'dfsf');
     if (!authorization) {
       return null;
     }
@@ -39,7 +40,7 @@ module.exports = {
     try {
       return verify(token, process.env.ACCESS_SECRET);
     } catch (e) {
-      console.log(e);
+      console.log(e, 'jeon');
       return null;
     }
   },
