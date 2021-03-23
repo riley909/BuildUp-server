@@ -6,13 +6,11 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-
 const indexRouter = require('./Routes/index');
 const userRouter = require('./Routes/user');
 const photoRouter = require('./Routes/photo');
 const todoRouter = require('./Routes/todo');
 const achievmentRouter = require('./Routes/achievment');
-
 
 const app = express();
 
@@ -28,10 +26,6 @@ app.use(
   })
 );
 
-let server;
-
-
-
 app.use('/', indexRouter);
 app.use('/user', userRouter); //user에관한 요청시 가는 곳
 app.use('/photo', photoRouter); //PHOTO에관한 요청시 가는 곳
@@ -42,8 +36,20 @@ app.use('/', (req, res) => {
   res.send('hello bulid up!!');
 });
 
-server = app.listen(4000, () => {
-  console.log('server on 4000');
-});
+let server;
+const PORT = 4000;
+
+if (fs.existsSync(`./key.pem`) && fs.existsSync(`./cert.pem`)) {
+  const privateKey = fs.readFileSync(__dirname + `/key.pem`, `utf-8`);
+  const certificate = fs.readFileSync(__dirname + `/cert.pem`, `utf-8`);
+  const credentials = { key: privateKey, cert: certificate };
+
+  server = https.createServer(credentials, app);
+  server.listen(PORT, () => console.log(`🚀 HTTPS Server listening on port ${PORT}`));
+} else {
+  server = app.listen(PORT, () => {
+    console.log('server on 4000');
+  });
+}
 
 module.exports = server;
