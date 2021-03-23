@@ -38,9 +38,10 @@ app.use('/', (req, res) => {
 
 let server;
 const PORT = 4000;
+const certPath = `/etc/letsencrypt/live/www.build-up-v.tk`;
 
-if (fs.existsSync(`./key.pem`) && fs.existsSync(`./cert.pem`)) {
-  const privateKey = fs.readFileSync(__dirname + `/key.pem`, `utf-8`);
+if (fs.existsSync(`${certPath}/privkey.pem`) && fs.existsSync(`${certPath}/cert.pem`)) {
+  const privateKey = fs.readFileSync(__dirname + `/privkey.pem`, `utf-8`);
   const certificate = fs.readFileSync(__dirname + `/cert.pem`, `utf-8`);
   const credentials = { key: privateKey, cert: certificate };
 
