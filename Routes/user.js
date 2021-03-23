@@ -5,14 +5,14 @@ const userLogin = require('../Controllers/User/login');
 const userLogout = require('../Controllers/User/logout');
 const userSignup = require('../Controllers/User/signup');
 const userInfo = require('../Controllers/User/userInfo');
-const accessTokenRequest = require('../Controllers/User/accessTokenRequest');
 const refreshTokenRequest = require('../Controllers/User/refreshTokenRequest');
+
+const auth = require('../middleware/auth');
 
 router.post('/login', userLogin);
 router.post('/logout', userLogout);
 router.post('/signup', userSignup);
-router.get('/info', userInfo);
-router.get('/accesstokenrequest', accessTokenRequest);
+router.get('/info', auth, userInfo);
 router.get('/refreshtokenrequest', refreshTokenRequest);
 
 module.exports = router;

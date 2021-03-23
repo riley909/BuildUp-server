@@ -32,7 +32,7 @@ module.exports = (req, res) => {
       const newAccessToken = generateAccessToken(result.dataValues);
       resendAccessToken(res, newAccessToken, result.dataValues);
       res.json({
-        access_token: newAccessToken,
+        access_token: newAccessToken,            // 여기 이부분 위에 33번째 줄과 겹칠것으로 보임 
       });
     })
     .catch((err) => {

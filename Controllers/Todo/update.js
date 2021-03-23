@@ -2,24 +2,29 @@ const { todo } = require('../../models');
 const { user } = require('../../models');
 
 module.exports = async (req, res) => {
-    const { user_id, id } = req.body;
-    await todo                      // 여기 achievment => user
-        .findOne({
-            where: { user_id: user_id }
-        })
-        .then(() => {
-            todo.update(
-                { content: content },
-                { where: { id: id } }
-            )
-                .then(seResult => {
-                    res.status(200).json({  // 무엇을 클라에게 전달할지 고민중 
-                        message: "successfully"
-                    })
-                }).catch(err => console.log(err))
+    const { content, id, order, isChecked, date_id } = req.body;
 
-        })
+    await todo
+        .update(
+            {
+                content: content,
+                order: order,
+                isChecked: isChecked,
+                date_id: date_id
+            },
+            {
+                where: {
+                    id: id,
+                    user_id: res.locals.userId
+                }
+            }
+        ).then(() => {
+            res.status(200).json({
+                message: "successfully"
+            })
+        }).catch(err => console.log(err))
 
 };
 
 
+// 업데이트 할때 체크상태랑 순서도 계속 바꿔줘야 할 듯 
