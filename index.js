@@ -40,9 +40,9 @@ app.use('/', (req, res) => {
 let server;
 const PORT = 4000;
 const options = {
-  ca: fs.readFileSync(`/etc/letsencrypt/live/www.build-up-v.tk/fullchain.pem`),
-  key: fs.readFileSync(`/etc/letsencrypt/live/www.build-up-v.tk/privkey.pem`),
-  cert: fs.readFileSync(`/etc/letsencrypt/live/www.build-up-v.tk/cert.pem`),
+  ca: fs.readFileSync(`./fullchain.pem`),
+  key: fs.readFileSync(`./privkey.pem`),
+  cert: fs.readFileSync(`./cert.pem`),
 };
 
 http.createServer(app).listen(PORT);
