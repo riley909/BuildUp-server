@@ -46,8 +46,8 @@ const options = {
 };
 
 http.createServer(app).listen(PORT);
-https.createServer(options, app).listen(443, () => {
-  console.log(`🚀 HTTPS Server listening on port 443`);
+https.createServer(options, app).listen(PORT, () => {
+  console.log(`🚀 HTTPS Server listening on port ${PORT}`);
 });
 server = app.listen(PORT, () => {
   console.log('server on 4000');
