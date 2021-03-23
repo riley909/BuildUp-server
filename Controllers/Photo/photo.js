@@ -1,9 +1,22 @@
-module.exports = async (req, res) => {
-  const weather = await Users.findOne({
-    where: { weather: req.body.weather },
-  }).catch(() => res.status(500).json({ message: 'not found' }));
+const { weather, photo } = require('../../models');
 
-  res
-    .status(200)
-    .json({ filepath: weather, message: 'successfully get background wallpaper' });
+module.exports = async (req, res) => {
+  const { code } = req.body;
+  await weather.
+    findOne({
+      where: { code: code }
+    }).then(result => {
+      if (!result) {
+        res.status(404).send("없는 날씨 코드입니다!");
+      } else {
+        photo.findOne({
+          where: { weather_id: result.dataValues.id }
+        }).then((result) => {
+          // console.log(result);
+          res.status(200).json({ image: result.dataValues.image })
+        })
+      }
+    })
+
+
 };
