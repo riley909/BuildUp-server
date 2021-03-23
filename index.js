@@ -45,12 +45,12 @@ const options = {
   cert: fs.readFileSync(`./cert.pem`),
 };
 
-http.createServer(app).listen(PORT);
-https.createServer(options, app).listen(PORT, () => {
+// http.createServer(app).listen(PORT);
+server = https.createServer(options, app).listen(PORT, () => {
   console.log(`🚀 HTTPS Server listening on port ${PORT}`);
 });
-server = app.listen(PORT, () => {
-  console.log('server on 4000');
-});
+// server = app.listen(PORT, () => {
+//   console.log('server on 4000');
+// });
 
 module.exports = server;
