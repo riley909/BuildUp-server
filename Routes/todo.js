@@ -9,8 +9,8 @@ const todoUpdate = require('../Controllers/Todo/update');
 const auth = require('../middleware/auth');
 
 router.post('/create', auth, todoCreate);
-router.post('/update', auth, todoUpdate);
-router.post('/remove', auth, todoRemove);
+router.put('/update', auth, todoUpdate);
+router.delete('/remove', auth, todoRemove);
 router.get('/info', auth, todoInfo);
 
 module.exports = router;
