@@ -11,6 +11,7 @@ const userRouter = require('./Routes/user');
 const photoRouter = require('./Routes/photo');
 const todoRouter = require('./Routes/todo');
 const achievmentRouter = require('./Routes/achievment');
+const socialRouter = require('./Routes/social');
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use('/user', userRouter); //user에관한 요청시 가는 곳
 app.use('/photo', photoRouter); //PHOTO에관한 요청시 가는 곳
 app.use('/todo', todoRouter);
 app.use('/achievment', achievmentRouter);
+app.use('/social', socialRouter);
 
 app.use('/', (req, res) => {
   res.send(`😎 hello bulid up!!`);
