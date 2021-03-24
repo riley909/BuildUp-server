@@ -9,7 +9,7 @@ const auth = require('../middleware/auth');
 
 router.get('/info', auth, info);
 router.post('/create', auth, create);
-router.post('/update', auth, update)
+router.put('/update', auth, update)
 
 
 module.exports = router;
