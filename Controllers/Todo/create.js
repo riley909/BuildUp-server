@@ -6,7 +6,8 @@ module.exports = async (req, res) => {
 
     await date.
         create({
-            date: now
+            date: now,
+            user_id: res.locals.userId
         }).then((result) => {
             todo
                 .create({
