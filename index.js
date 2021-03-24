@@ -1,7 +1,6 @@
 const express = require('express');
 require('dotenv').config();
 const fs = require('fs');
-const http = require('http');
 const https = require('https');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -34,23 +33,14 @@ app.use('/todo', todoRouter);
 app.use('/achievment', achievmentRouter);
 
 app.use('/', (req, res) => {
-  res.send('hello bulid up!!');
+  res.send(`😎 hello bulid up!!`);
 });
 
 let server;
 const PORT = 4000;
-const options = {
-  ca: fs.readFileSync(`./fullchain.pem`),
-  key: fs.readFileSync(`./privkey.pem`),
-  cert: fs.readFileSync(`./cert.pem`),
-};
 
-// http.createServer(app).listen(PORT);
-server = https.createServer(options, app).listen(PORT, () => {
-  console.log(`🚀 HTTPS Server listening on port ${PORT}`);
+server = app.listen(PORT, () => {
+  console.log(`🚀 Server listening on port ${PORT}`);
 });
-// server = app.listen(PORT, () => {
-//   console.log('server on 4000');
-// });
 
 module.exports = server;
