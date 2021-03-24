@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
-    origin: ['https://build-up-v.tk'],
+    origin: ['*'],
     credentials: true,
     methods: ['GET', 'POST', 'OPTIONS'],
   })
