@@ -2,7 +2,7 @@ const { todo } = require('../../models');
 const { date } = require('../../models');
 
 module.exports = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.body.data;
 
   await todo
     .destroy({
