@@ -12,7 +12,12 @@ module.exports = {
   },
   sendRefreshToken: (res, refreshToken) => {
     // refreshToken 전송
-    res.cookie('refreshToken', refreshToken, { httpOnly: true });
+    res.cookie('refreshToken', refreshToken, {
+      path: "/",
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
   },
   sendAccessToken: (res, accessToken) => {
     // accessToken 전송
