@@ -16,7 +16,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ['https://api.build-up-v.tk', 'https://build-up-v.tk'],
+    origin: true,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   })
@@ -35,6 +35,10 @@ app.use('/achievment', achievmentRouter);
 
 app.use('/', (req, res) => {
   res.send(`😎 hello bulid up!!`);
+});
+
+app.use((err, req, res, next) => {
+  console.log('error:', err);
 });
 
 let server;
