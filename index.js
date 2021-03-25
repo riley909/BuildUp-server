@@ -15,17 +15,18 @@ const socialRouter = require('./Routes/social');
 
 const app = express();
 
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  })
+);
+
 app.use(logger('dev'));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(
-  cors({
-    origin: ['*'],
-    credentials: true,
-    methods: ['GET', 'POST', 'OPTIONS'],
-  })
-);
 
 app.use('/', indexRouter);
 app.use('/user', userRouter); //user에관한 요청시 가는 곳
@@ -36,6 +37,10 @@ app.use('/social', socialRouter);
 
 app.use('/', (req, res) => {
   res.send(`😎 hello bulid up!!`);
+});
+
+app.use((err, req, res, next) => {
+  console.log('error:', err);
 });
 
 let server;
