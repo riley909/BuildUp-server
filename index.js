@@ -14,17 +14,18 @@ const achievmentRouter = require('./Routes/achievment');
 
 const app = express();
 
+app.use(
+  cors({
+    origin: ['https://api.build-up-v.tk', 'https://build-up-v.tk'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  })
+);
+
 app.use(logger('dev'));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(
-  cors({
-    origin: ['*'],
-    credentials: true,
-    methods: ['GET', 'POST', 'OPTIONS'],
-  })
-);
 
 app.use('/', indexRouter);
 app.use('/user', userRouter); //user에관한 요청시 가는 곳
